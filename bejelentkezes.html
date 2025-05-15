@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regisztráció és Bejelentkezés</title>
+    <link rel="stylesheet" type="text/css" href="bej.css">
+</head>
+<body>
+    <div id="registration-form">
+        <h2>Regisztráció</h2>
+        <label for="reg-username">Felhasználónév/Email:</label>
+        <input type="text" id="reg-username" required>
+
+        <label for="reg-password">Jelszó:</label>
+        <input type="password" id="reg-password" required>
+
+        <button onclick="register()">Regisztráció</button>
+    </div>
+
+    <div id="login-form">
+        <h2>Bejelentkezés</h2>
+        <label for="login-username">Felhasználónév/Email:</label>
+        <input type="text" id="login-username" required>
+
+        <label for="login-password">Jelszó:</label>
+        <input type="password" id="login-password" required>
+
+        <button onclick="checkCredentials()">Bejelentkezés</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="bej.js"></script>
+</body>
+</html>
