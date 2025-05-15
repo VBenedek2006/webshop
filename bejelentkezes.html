@@ -1,35 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regisztráció és Bejelentkezés</title>
-    <link rel="stylesheet" type="text/css" href="bej.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Regisztráció és Bejelentkezés</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <style>
+    /* Alap stílusok */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Háttérkép textúrával */
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* Fejléc */
+    #header {
+      background-color: #e8ecf7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    #navbar {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #navbar li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    #navbar li a:hover,
+    #navbar li a.active {
+      color: #007bff;
+    }
+
+    /* Űrlap konténerek */
+    #login-form, #registration-form {
+      width: 350px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #ffffffcc; /* kicsit átlátszó fehér */
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    #login-form h2, #registration-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .switch-form {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .switch-form a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
+
+    /* Eredmény szöveg */
+    #result {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
 </head>
 <body>
-    <div id="registration-form">
-        <h2>Regisztráció</h2>
-        <label for="reg-username">Felhasználónév/Email:</label>
-        <input type="text" id="reg-username" required>
 
-        <label for="reg-password">Jelszó:</label>
-        <input type="password" id="reg-password" required>
+  <!-- Fejléc -->
+  <section id="header">
+    <a href="#"><img src="img/cactusjack.png" class="logo" alt="Cactus Jack logó"></a>
+    <ul id="navbar">
+      <li><a href="index.html">Főoldal</a></li>
+      <li><a href="cipo.html">Cipők</a></li>
+      <li><a href="ruha.html">Ruházat</a></li>
+      <li><a href="kosar.html">Kosár</a></li>
+      <li><a href="bejelentkezes.html">Bejelentkezés/Regisztráció</a></li>
+    </ul>
+  </section>
 
-        <button onclick="register()">Regisztráció</button>
+  <!-- Regisztrációs Űrlap -->
+  <div id="registration-form" style="display: none;">
+    <h2>Regisztráció</h2>
+
+    <label for="reg-username">Felhasználónév:</label>
+    <input type="text" id="reg-username" required>
+
+    <label for="reg-email">Email:</label>
+    <input type="email" id="reg-email" required>
+
+    <label for="reg-password">Jelszó:</label>
+    <input type="password" id="reg-password" required>
+
+    <button onclick="register()">Regisztráció</button>
+
+    <div class="switch-form">
+      <span>Már van fiókod? <a onclick="showLogin()">Jelentkezz be</a></span>
     </div>
+  </div>
 
-    <div id="login-form">
-        <h2>Bejelentkezés</h2>
-        <label for="login-username">Felhasználónév/Email:</label>
-        <input type="text" id="login-username" required>
+  <!-- Bejelentkezési Űrlap -->
+  <div id="login-form">
+    <h2>Bejelentkezés</h2>
+    <label for="login-username">Felhasználónév / Email:</label>
+    <input type="text" id="login-username" required>
 
-        <label for="login-password">Jelszó:</label>
-        <input type="password" id="login-password" required>
+    <label for="login-password">Jelszó:</label>
+    <input type="password" id="login-password" required>
 
-        <button onclick="checkCredentials()">Bejelentkezés</button>
-        <p id="result"></p>
+    <button onclick="checkCredentials()">Bejelentkezés</button>
+    <p id="result"></p>
+
+    <div class="switch-form">
+      <span>Nincs fiókod? <a onclick="showRegister()">Regisztrálj</a></span>
     </div>
+  </div>
 
-    <script src="bej.js"></script>
+  <script>
+    function showLogin() {
+      document.getElementById("login-form").style.display = "block";
+      document.getElementById("registration-form").style.display = "none";
+      document.getElementById("result").innerText = "";
+    }
+
+    function showRegister() {
+      document.getElementById("registration-form").style.display = "block";
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("result").innerText = "";
+    }
+
+    function register() {
+      // Egyszerű példa: csak figyelmeztetés
+      alert("Regisztráció sikeres! (Ez csak demo.)");
+    }
+
+    function checkCredentials() {
+      const user = document.getElementById("login-username").value;
+      const pass = document.getElementById("login-password").value;
+
+      if (user === "teszt" && pass === "1234") {
+        document.getElementById("result").innerText = "Sikeres bejelentkezés!";
+        document.getElementById("result").style.color = "green";
+      } else {
+        document.getElementById("result").innerText = "Hibás adatok!";
+        document.getElementById("result").style.color = "red";
+      }
+    }
+
+    window.onload = function () {
+      showLogin(); // Alapértelmezett nézet
+    };
+  </script>
 </body>
 </html>
