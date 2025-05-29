@@ -10,14 +10,12 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      /* Háttérkép textúrával */
       background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       color: #333;
     }
 
-    /* Fejléc */
     #header {
       background-color: #e8ecf7;
       display: flex;
@@ -53,12 +51,11 @@
       color: #007bff;
     }
 
-    /* Űrlap konténerek */
     #login-form, #registration-form {
       width: 350px;
       margin: 50px auto;
       padding: 30px;
-      background-color: #ffffffcc; /* kicsit átlátszó fehér */
+      background-color: #ffffffcc;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       backdrop-filter: blur(5px);
@@ -121,12 +118,10 @@
       text-decoration: underline;
     }
 
-    /* Eredmény szöveg */
     #result {
       margin-top: 10px;
       text-align: center;
       font-weight: bold;
-      color: red;
     }
   </style>
 </head>
@@ -140,7 +135,7 @@
       <li><a href="cipo.html">Cipők</a></li>
       <li><a href="ruha.html">Ruházat</a></li>
       <li><a href="kosar.html">Kosár</a></li>
-      <li><a href="bejelentkezes.html">Bejelentkezés/Regisztráció</a></li>
+      <li><a href="bejelentkezes.html" class="active">Bejelentkezés/Regisztráció</a></li>
     </ul>
   </section>
 
@@ -181,40 +176,7 @@
     </div>
   </div>
 
-  <script>
-    function showLogin() {
-      document.getElementById("login-form").style.display = "block";
-      document.getElementById("registration-form").style.display = "none";
-      document.getElementById("result").innerText = "";
-    }
-
-    function showRegister() {
-      document.getElementById("registration-form").style.display = "block";
-      document.getElementById("login-form").style.display = "none";
-      document.getElementById("result").innerText = "";
-    }
-
-    function register() {
-      // Egyszerű példa: csak figyelmeztetés
-      alert("Regisztráció sikeres! (Ez csak demo.)");
-    }
-
-    function checkCredentials() {
-      const user = document.getElementById("login-username").value;
-      const pass = document.getElementById("login-password").value;
-
-      if (user === "teszt" && pass === "1234") {
-        document.getElementById("result").innerText = "Sikeres bejelentkezés!";
-        document.getElementById("result").style.color = "green";
-      } else {
-        document.getElementById("result").innerText = "Hibás adatok!";
-        document.getElementById("result").style.color = "red";
-      }
-    }
-
-    window.onload = function () {
-      showLogin(); // Alapértelmezett nézet
-    };
-  </script>
+  <!-- A JavaScript fájl importálása a legvégén -->
+  <script src="bej.js"></script>
 </body>
 </html>
