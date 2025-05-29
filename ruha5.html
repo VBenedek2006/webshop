@@ -176,7 +176,22 @@
 
 
     
-    <script src="script.js"></script>
+<script src="script.js"></script>
+<script src="termek.js"></script>
+<script src="kosar.js"></script>
+
+<script>
+function addToCart(productName, price) {
+  // Kosár tartalmának létrehozása vagy frissítése a helyi tárolóban
+  let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  cartItems.push({ name: productName, price: price });
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+
+  // Átirányítás a kosár oldalra
+  window.location.href = 'kosar.html';
+  alert("ffffff");
+}
+</script>
 </body>
 
 </html>
