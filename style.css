@@ -466,3 +466,11 @@ footer .follow i:hover{
     background-size: cover;
     background-position: center;
 }
+
+.cart-table {
+  color: black; /* Szöveg fekete */
+}
+
+.cart-table th, .cart-table td {
+  color: black; /* Fejléc és cellák fekete betűvel */
+}

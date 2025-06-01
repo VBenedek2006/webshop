@@ -61,8 +61,8 @@
                 <option>44</option>
                 <option>44.5</option>
             </select>
-            <input type="number" value="1">
-            <button class="normal">Kosárba</button>
+           <input type="number" id="darabszam" value="1">
+            <button class="normal" onclick="addToCart()">Kosárba</button>
             <h4>Termékleírás</h4>
             <span style="color: black;">Ez a Nike SB Dunk Low szarvasbőr felsőrészből áll, paisley vászon és kockás flanel felsőrésszel. 
                 Ahogy a paisley felületek lekopnak, egy elefántmintás anyag kerül elő. A gallér körüli hímzett szöveg, a kötélfűző és a La Flame Cactus Jack logója 
@@ -169,41 +169,34 @@
     </footer>
 
     <script>
-        var MainImg = document.getElementById("MainImg");
-        var smallimg = document.getElementsByClassName("small-img");
+  function addToCart() {
+    var productName = document.querySelector('.single-pro-details h4').innerText;
+    var priceStr = document.querySelector('.single-pro-details h2').innerText;
+    priceStr = priceStr.replace("FT", "").replace(/\./g, "").trim();
+    var price = parseInt(priceStr);
+    var productImage = document.getElementById("MainImg").src;
+    var quantity = parseInt(document.getElementById("darabszam").value);
 
-        smallimg[0].onclick = function(){
-            MainImg.src = smallimg[0].src;
-        }
-        smallimg[1].onclick = function(){
-            MainImg.src = smallimg[1].src;
-        }
-        smallimg[2].onclick = function(){
-            MainImg.src = smallimg[2].src;
-        }
-        smallimg[3].onclick = function(){
-            MainImg.src = smallimg[3].src;
-        }
-    </script>
-
-
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingIndex = cartItems.findIndex(item => item.name === productName);
     
-<script src="script.js"></script>
-<script src="termek.js"></script>
-<script src="kosar.js"></script>
-
-<script>
-function addToCart(productName, price) {
-  // Kosár tartalmának létrehozása vagy frissítése a helyi tárolóban
-  let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  cartItems.push({ name: productName, price: price });
-  localStorage.setItem('cart', JSON.stringify(cartItems));
-
-  // Átirányítás a kosár oldalra
-  window.location.href = 'kosar.html';
-  alert("Sikeresen hozzáadva a kosárhoz!");
-}
+    if (existingIndex !== -1) {
+      cartItems[existingIndex].quantity += quantity;
+    } else {
+      cartItems.push({ name: productName, price: price, quantity: quantity, image: productImage });
+    }
+    
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    alert("Sikeresen hozzáadva a kosárhoz!");
+    window.location.href = 'kosar.html';
+  }
 </script>
+
+  
+  <script src="script.js"></script>
+  <script src="termek.js"></script>
+  <!-- A kosár funkció megjelenítéséért felelős script már a kosar.html-ben betöltődik -->
+  <script src="kosar.js"></script>
 </body>
 
 </html>
