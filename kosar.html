@@ -1,91 +1,255 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snkrsstore</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snkrsstore</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* Általános stílus */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    /* Header */
+    #header {
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    #header .logo {
+      display: block;
+    }
+    #navbar {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    #navbar li {
+      margin: 0 15px;
+    }
+    #navbar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    #navbar a.active {
+      color: #ff4d4d;
+    }
+    /* Kosár szekció */
+    #cart-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    #cart-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cart-table th, .cart-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-table th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+    .cart-table img {
+      width: 80px;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+    /* A végösszeg sor */
+    #total-price {
+      margin-top: 15px;
+      font-size: 20px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    /* Gombok (kosár rész) */
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #clear-cart {
+      background-color: #ff4d4d;
+      color: #fff;
+      margin-right: 10px;
+    }
+    #clear-cart:hover {
+      background-color: #e63946;
+    }
+    #continue-payment {
+      background-color: #28a745;
+      color: #fff;
+    }
+    #continue-payment:hover {
+      background-color: #218838;
+    }
+    /* Fizetési szakasz */
+    #payment-section {
+      display: none;
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px 30px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    #payment-section h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    #payment-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    #payment-section input, 
+    #payment-section select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    /* Kártyaadatok szekció stílusa */
+    #card-details {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+    #card-details h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    /* Newsletter */
+    #newsletter {
+      background: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+    #newsletter input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #newsletter button.normal {
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+    footer .col {
+      display: inline-block;
+      vertical-align: top;
+      margin: 10px;
+      min-width: 150px;
+    }
+    footer img.logo {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Header Section -->
+  <section id="header">
+    <a href="index.html"><img src="img/cactusjack.png" class="logo" alt="Logo" width="125px"></a>
+    <ul id="navbar">
+      <li><a class="active" href="index.html">Főoldal</a></li>
+      <li><a href="cipo.html">Cipők</a></li>
+      <li><a href="ruha.html">Ruházat</a></li>
+      <li><a href="kosar.html">Kosár</a></li>
+      <li><a href="bejelentkezes.html">Bejelentkezés/Regisztráció</a></li>
+    </ul>
+  </section>
+
+  <!-- Cart Section -->
+  <section id="cart-section" class="section-p1">
+    <h2>Bevásárlókosár</h2>
+    <table id="cart-items" class="cart-table">
+      <!-- Dinamikusan generált tartalom -->
+    </table>
+    <h3 id="total-price">Végösszeg: 0&nbsp;Ft</h3>
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="clear-cart">Kosár ürítése</button>
+      <button id="continue-payment">Tovább a fizetésre</button>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section id="payment-section">
+    <h2>Fizetési adatok</h2>
+    <label>Név:</label>
+    <input type="text" id="name" placeholder="Pl. Kovács Péter">
     
-    <section id="header">
-        <a href="#"><img src="img/cactusjack.png" class="logo" alt="" width="125px"></a>
-
-        <div>
-            <ul id="navbar">
-                <li><a class="active" href="index.html">Főoldal</a></li>
-                <li><a href="cipo.html">Cipők</a></li>
-                <li><a href="ruha.html">Ruházat</a></li>
-                <li><a href="kosar.html">Kosár</a></li>
-                <li><a href="bejelentkezes.html">Bejelentkezés/Regisztráció</a></li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="newsletter" class="section-p1">
-        <div class="newstext">
-            <h4>IRATKOZZ FEL HÍRLEVELÜNKRE</h4>
-            <p>Iratkozz fel hírlevelünkre, hogy minden újdonságunkról, meglepetésünkről értesülj!</p>
-        </div>
-        <div class="form">
-                <input type="text" placeholder="EMAIL">
-                <button class="normal">Feliratkozás</button>
-        </div>
-    </section>
-    <button id="fetch-posts">Posztok lekérése</button>
-
-    <footer class="section-p1">
-        <div class="col">
-            <img src="img/cactusjack.png" class="logo" alt="" width="125px">
-            <h4>Információk</h4>
-            <p> <strong>Üzletünk címe: </strong> </p>
-            <p> <strong>Telefon </strong> </p>
-            <p> <strong>Nyitvatartás: </strong> 9:00 - 22:00, Hétfő - Vasárnap</p>
-            <div class="follow">
-                <h4>Kövess minket</h4>
-            </div>
-        </div>
-
-        <div class="col">
-            <h4>Rólunk</h4>
-            <a href="#">Általános Szerződési Feltételek</a>
-            <a href="#">Szállítási információ</a>
-            <a href="#">Visszatérítési és visszaküldési szabályzat</a>
-            <a href="#">Kapcsolat</a>
-        </div>
-        <div class="col">
-            <h4>Fiókom</h4>
-            <a href="#">Fiókom</a>
-            <a href="#">Belépés</a>
-            <a href="#">Rendelés követése</a>
-            <a href="#">Kedvencek</a>
-            <a href="#">Help</a>
-        </div>
-
-        <div class="col install">
-            <h4>Töltsd le az appunk</h4>
-            <p>IOS és Android eszközökre</p>
-            <div class="row">
-                <img src="img/apple.jpg" alt="" width="125px">
-                <img src="img/google.png" alt="" width="125px">
-            </div>
-            <p>Elfogadott fizetési lehetőségek</p>
-            <img src="img/pay.png" alt="">
-        </div>
-
-    </footer>
-
+    <label>Cím:</label>
+    <input type="text" id="address" placeholder="Pl. Budapest, Kossuth Lajos utca 12.">
     
-    <script src="script.js"></script>
-    <script src="valami.js"></script>
+    <label>Szállítási mód:</label>
+    <select id="shipping">
+      <option value="kiszallitas">Kiszállítás</option>
+      <option value="atvetel">Személyes átvétel</option>
+    </select>
     
+    <!-- Statikus fizetési mód: Bankkártya -->
+    <p style="font-weight: bold; margin-bottom: 8px;">Fizetési mód: Bankkártya</p>
+    
+    <div id="card-details">
+      <h3>Bankkártyás fizetés</h3>
+      <label>Kártyaszám:</label>
+      <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
+      
+      <label>Lejárati dátum:</label>
+      <input type="text" id="card-expiry" placeholder="MM/YY">
+      
+      <label>CVV:</label>
+      <input type="text" id="card-cvv" placeholder="XXX">
+    </div>
+    <button id="finalize-order">Rendelés véglegesítése</button>
+  </section>
 
-    <div id="cart-items"></div>
-
+ 
+  <script src="script.js"></script>
+  <script src="valami.js"></script>
+  <script src="kosar.js"></script>
 </body>
-
 </html>
